@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#141613">
+
+    <title>Cinezi — Your Cinema Journal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="container nav-inner">
+        <a href="#home" class="logo">cine<span>zi.</span></a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home" class="active">Home</a>
+            <a href="#movies">Discover</a>
+            <a href="#watchlist">Watchlist</a>
+            <a href="#community">Community</a>
+            <a href="#forum">Forum</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="#watchlist" class="watchlist-shortcut" title="My Watchlist">
+                ♡ <span id="watchlistCount">0</span>
+            </a>
+            <button class="profile-btn" id="profileBtn" aria-label="Profile">U</button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO -->
+    <section class="hero container" id="home">
+        <div class="hero-content">
+            <p class="eyebrow">YOUR PERSONAL CINEMA JOURNAL</p>
+            <h1>Stories worth<br> <span>remembering.</span></h1>
+
+            <p class="hero-description">
+                Discover great films, keep track of what you watch,
+                share your reviews, and connect with people who love cinema.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#movies" class="btn btn-primary">Explore Movies <span>↗</span></a>
+                <a href="#watchlist" class="btn btn-outline">My Watchlist</a>
+            </div>
+
+            <div class="hero-note">
+                <span class="note-line"></span>
+                <span>A little space for your love of cinema.</span>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="hero-image">
+                <img
+                    src="https://image.tmdb.org/t/p/w1280/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
+                    alt="Featured movie"
+                >
+                <div class="hero-image-overlay"></div>
+                <div class="hero-caption">
+                    <span>FEATURED COLLECTION</span>
+                    <h2>Beyond the<br>Ordinary</h2>
+                    <p>Discover stories that stay with you.</p>
+                </div>
+            </div>
+            <div class="hero-side-note">
+                <span class="side-note-number">01</span>
+                <span>CURATED FOR<br>FILM LOVERS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="container search-section">
+        <div class="search-heading">
+            <span class="search-icon">⌕</span>
+            <div>
+                <strong>Find your next film</strong>
+                <small>Search by title, actor, or director</small>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Try “Interstellar”, Christopher Nolan..."
+                autocomplete="off"
+            >
+            <button class="btn btn-primary" id="searchBtn">Search</button>
+        </div>
+    </section>
+
+    <!-- MOVIES -->
+    <section class="container section" id="movies">
+        <div class="section-heading">
+            <div>
+                <p class="section-label">THE COLLECTION</p>
+                <h2>Discover Movies</h2>
+                <p>Films worth adding to your watchlist.</p>
+            </div>
+            <span class="section-index">01 / DISCOVER</span>
+        </div>
+
+        <div class="filter-row">
+            <div class="filter-caption">Explore by</div>
+
+            <select id="genreFilter" aria-label="Filter by genre">
+                <option value="">All Genres</option>
+            </select>
+
+            <select id="sortFilter" aria-label="Sort movies">
+                <option value="popular">Most Popular</option>
+                <option value="rating">Top Rated</option>
+                <option value="newest">Newes<t/option>
+            </select>
+        </div>
+
+        <div class="movie-grid" id="movieGrid">
+            <div class="loading">Loading movies...</div>
+        </div>
+
+        <div class="pagination">
+            <button class="btn btn-outline" id="loadMoreBtn">Load More Movies ↓</button>
+        </div>
+    </section>
+
+    <!-- WATCHLIST -->
+    <section class="container section watchlist-section" id="watchlist">
+        <div class="section-heading">
+            <div>
+                <p class="section-label">YOUR PERSONAL LIBRARY</p>
+                <h2>My Watchlist</h2>
+                <p>Keep the films you want to watch close.</p>
+            </div>
+            <span class="section-index">02 / MY LIST</span>
+        </div>
+
+        <div class="watchlist-toolbar">
+            <div class="watchlist-tabs" role="tablist">
+                <button class="watch-tab active" data-watch-tab="want">Want to Watch <span id="wantCount">0</span></button>
+                <button class="watch-tab" data-watch-tab="watched">Watched <span id="watchedCount">0</span></button>
+            </div>
+            <p class="watchlist-hint">Saved only on this browser</p>
+        </div>
+
+        <div class="watchlist-grid" id="watchlistGrid"></div>
+    </section>
+
+    <!-- MOVIE DETAIL -->
+    <section class="container section detail-section" id="movieDetail">
+        <div class="section-heading">
+            <div>
+                <p class="section-label">THE FULL STORY</p>
+                <h2>Movie Details</h2>
+            </div>
+            <span class="section-index">03 / DETAILS</span>
+        </div>
+
+        <div id="detailContent" class="detail-placeholder">
+            <span class="placeholder-icon">✳</span>
+            <p>Select a movie to explore its story, cast, and trailer.</p>
+        </div>
+    </section>
+
+    <!-- RATING -->
+    <section class="container section" id="ratingSection">
+        <div class="section-heading">
+            <div>
+                <p class="section-label">YOUR VERDICT</p>
+                <h2>Rate the Movie</h2>
+                <p>Your rating is saved to your personal journal.</p>
+            </div>
+        </div>
+
+        <div class="rating-layout">
+            <div class="rating-panel">
+                <span class="panel-kicker">YOUR PERSONAL RATING</span>
+                <p id="ratingMovieName">Choose a movie first.</p>
+
+                <div class="star-rating" id="starRating">
+                    <button data-value="1" aria-label="1 star">★</button>
+                    <button data-value="2" aria-label="2 stars">★</button>
+                    <button data-value="3" aria-label="3 stars">★</button>
+                    <button data-value="4" aria-label="4 stars">★</button>
+                    <button data-value="5" aria-label="5 stars">★</button>
+                </div>
+
+                <p id="ratingLabel">Your rating will appear here.</p>
+            </div>
+
+            <div class="rating-summary">
+                <div>
+                    <span class="panel-kicker">YOUR AVERAGE</span>
+                    <div id="ratingAverage">0.0</div>
+                    <p>Based on your ratings</p>
+                </div>
+                <div class="rating-bars" id="ratingBars"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="container section" id="reviews">
+        <div class="section-heading">
+            <div>
+                <p class="section-label">LET'S TALK CINEMA</p>
+                <h2>Reviews & Thoughts</h2>
+                <p>Honest opinions make every film conversation better.</p>
+            </div>
+            <span class="section-index">04 / REVIEWS</span>
+        </div>
+
+        <div class="review-layout">
+            <aside class="review-compose">
+                <div class="compose-heading">
+                    <span class="compose-icon">✎</span>
+                    <div>
+                        <h3>Write a review</h3>
+                        <p>Share what the movie made you feel.</p>
+                    </div>
+                </div>
+
+                <input type="text" id="reviewTitle" placeholder="Give your review a title...">
+                <textarea id="reviewText" placeholder="What did you think about this movie?"></textarea>
+
+                <label class="spoiler-label">
+                    <input type="checkbox" id="spoilerToggle">
+                    <span>Contains spoilers</span>
+                </label>
+
+                <button class="btn btn-primary full-btn" id="submitReview">Publish Review ↗</button>
+                <p class="form-note">Choose a movie before publishing your review.</p>
+            </aside>
+
+            <div class="review-feed">
+                <div class="feed-heading">
+                    <h3>Community reviews</h3>
+                    <span id="reviewCount">0 reviews</span>
+                </div>
+                <div class="review-list" id="reviewList"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="community-section" id="community">
+        <div class="container section">
+            <div class="section-heading">
+                <div>
+                    <p class="section-label">PEOPLE BEHIND THE REVIEWS</p>
+                    <h2>Find Your Film People</h2>
+                    <p>Meet viewers who might see movies the way you do.</p>
+                </div>
+                <span class="section-index">05 / COMMUNITY</span>
+            </div>
+
+            <div class="community-layout">
+                <div class="community-main">
+                    <div class="community-intro">
+                        <div>
+                            <span class="panel-kicker">CINEZI MEMBERS</span>
+                            <h3>Good films are better<br>when shared.</h3>
+                        </div>
+                        <p>Explore different tastes, discover new perspectives, and start a conversation.</p>
+                    </div>
+
+                    <div class="community-grid" id="communityGrid"></div>
+                </div>
+
+                <aside class="community-sidebar">
+                    <div class="taste-panel">
+                        <span class="panel-kicker">YOUR CINEMA PROFILE</span>
+                        <div class="taste-icon">✳</div>
+                        <h3>Find your<br>taste match.</h3>
+                        <p>Rate movies to build your taste profile and see which members share your interests.</p>
+                        <a href="#ratingSection" class="text-link">Start rating films ↗</a>
+                    </div>
+
+                    <div class="community-stat">
+                        <span class="panel-kicker">A LITTLE REMINDER</span>
+                        <p>Different opinions make better conversations. Be kind, stay curious.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORUM -->
+    <section class="container section" id="forum">
+        <div class="section-heading">
+            <div>
+                <p class="section-label">THE CINEMA ROOM</p>
+                <h2>Open Discussions</h2>
+                <p>Questions, theories, recommendations, and everything in between.</p>
+            </div>
+            <span class="section-index">06 / FORUM</span>
+        </div>
+
+        <div class="forum-layout">
+            <div class="forum-feed">
+                <div class="feed-heading">
+                    <h3>Latest conversations</h3>
+                    <span>Community board</span>
+                </div>
+                <div id="forumList" class="forum-list"></div>
+            </div>
+
+            <aside class="forum-compose">
+                <span class="panel-kicker">START A CONVERSATION</span>
+                <h3>What's on<br>your mind?</h3>
+                <p>Have a theory, a question, or a film recommendation? Share it with the community.</p>
+
+                <input type="text" id="forumTitle" placeholder="Discussion title...">
+                <textarea id="forumText" placeholder="Write something..."></textarea>
+                <button class="btn btn-primary full-btn" id="submitForum">Post Discussion ↗</button>
+            </aside>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-top">
+        <a href="#home" class="logo">cine<span>zi.</span></a>
+        <p>A little space for people who love cinema.</p>
+        <a href="#home" class="back-top">Back to top ↑</a>
+    </div>
+    <div class="container footer-bottom">
+        <small>© 2026 Cinezi. Movie data provided by TMDB.</small>
+        <small>Made for film lovers.</small>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
